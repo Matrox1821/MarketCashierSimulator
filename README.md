@@ -1,9 +1,13 @@
+# Market Cashier Simulator
+
+This Arduino-based project replicates the essential operations of a market cashier system, including product registration through unique identifiers, automatic total calculation, and handling of payment input. By Vallejos Ricardo y Galarza Matías.
+
 ## How use Git (in any terminal)
 
 **Clone the repository**
 
 ```bash
-  git clone https://github.com/Matrox1821/MarketCashierSimulator.git
+    > git clone https://github.com/Matrox1821/MarketCashierSimulator.git
 ```
 
 **How create a branch?**
@@ -26,20 +30,20 @@
 
 ```bash
 //Add all changes
-    git add .
+    > git add .
 
 //Add specific changed files (has no limit)
-    git add "file.extension" "file/" "etc"
+    > git add "file.extension" "file/" "etc"
 ```
 
 **Commit message**
 
 ```bash
-  git commit -m "message of commit"
+    > git commit -m "message of commit"
 ```
 
 **Send changes to branch in github**
 
 ```bash
-  git push origin branch-name
+    > git push -u origin branch-name
 ```
