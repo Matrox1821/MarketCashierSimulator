@@ -19,12 +19,30 @@ This Arduino-based project replicates the essential operations of a market cashi
 
 //How to enter the branch?
 
+    > git switch branch-name
+
     > git checkout branch-name
 
 //How create a branch and enter the branch?
 
     > git checkout -b branch-name
 ```
+
+
+**When you have doubts about whether there are changes in the main branch (Do this whenever you think there is data in main that you don't have).**
+
+```bash
+//Switch to the main branch on your local machine (just in case) 
+     > git checkout main
+
+//Fetch changes from GitHub
+    > git fetch origin
+
+//Pull the latest changes from GitHub into your local main (If you're already on main, just do this no need to do the previous steps).
+    > git pull origin main
+```
+
+
 
 **Add changes to commit**
 
