@@ -45,6 +45,12 @@ enum Estado {
 
 Estado estado_actual = ESPERANDO_CODIGO;
 
+String inserted_product;
+char char_code[3];
+char cust_key;
+byte digits=3,i=0,total_codes=100;
+byte productIndex;
+int inserted_products_lenght=0;
 void setup() {
   Serial.begin(9600);
   Serial.println("Ingrese el código de producto [xxx]: ");
