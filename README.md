@@ -10,6 +10,21 @@ This Arduino-based project replicates the essential operations of a market cashi
     > git clone https://github.com/Matrox1821/MarketCashierSimulator.git
 ```
 
+```bash
+ //Esto lo tenes que hacer antes de empezar a escribir codigo si te sale error es porque no hiciste un commit, ve a la parte de gir add y git commit
+
+//Switch to the main branch on your local machine (just in case)
+     > git checkout main
+
+//Fetch changes from GitHub
+    > git fetch origin
+
+//Pull the latest changes from GitHub into your local main (If you're already on main, just do this no need to do the previous steps).
+    > git pull origin main
+
+    //luego volver a tu rama con git checkout "nombre rama"
+```
+
 **How create a branch?**
 
 ```bash
@@ -28,21 +43,7 @@ This Arduino-based project replicates the essential operations of a market cashi
     > git checkout -b branch-name
 ```
 
-
 **When you have doubts about whether there are changes in the main branch (Do this whenever you think there is data in main that you don't have).**
-
-```bash
-//Switch to the main branch on your local machine (just in case) 
-     > git checkout main
-
-//Fetch changes from GitHub
-    > git fetch origin
-
-//Pull the latest changes from GitHub into your local main (If you're already on main, just do this no need to do the previous steps).
-    > git pull origin main
-```
-
-
 
 **Add changes to commit**
 
