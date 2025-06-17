@@ -14,53 +14,108 @@ const char keys[ROWS][COLS] = {
 //  A:Add (Add to end of list)  --  B:Apply discount (Apply the discount to the total purchase.)  --  C:Cancel purchase (clears the product list)  --  D:Delete (Remove last product) --
 //  ' = ':Show total and request payment (Calculates total, waits for input, gives change) -- E:Exit (End or Reboot program)  --
 
-const byte PRODUCTS = 9;
+const byte PRODUCTS = 20;
 const byte DATA = 3;
 
 // Producto 0
 const char p00_0[] PROGMEM = "001";
-const char p00_1[] PROGMEM = "CocaCola";
-const char p00_2[] PROGMEM = "3000";
+const char p00_1[] PROGMEM = "CocaCola 2.25L";
+const char p00_2[] PROGMEM = "4000";
 
 // Producto 1
 const char p01_0[] PROGMEM = "002";
-const char p01_1[] PROGMEM = "Papas Fritas 500g";
-const char p01_2[] PROGMEM = "1500";
+const char p01_1[] PROGMEM = "Papas Fritas Pehuamar 450gr";
+const char p01_2[] PROGMEM = "8500";
 
 // Producto 2
 const char p02_0[] PROGMEM = "003";
-const char p02_1[] PROGMEM = "Mostaza";
-const char p02_2[] PROGMEM = "100";
+const char p02_1[] PROGMEM = "Mostaza Savora 500gr";
+const char p02_2[] PROGMEM = "2250";
 
 // Producto 3
 const char p03_0[] PROGMEM = "004";
-const char p03_1[] PROGMEM = "Pepas 1kg";
-const char p03_2[] PROGMEM = "2300";
+const char p03_1[] PROGMEM = "Pepas Delicias de la Nonna 200gr";
+const char p03_2[] PROGMEM = "1200";
 
 // Producto 4
 const char p04_0[] PROGMEM = "005";
-const char p04_1[] PROGMEM = "Galle. 5 semillas";
-const char p04_2[] PROGMEM = "1000";
+const char p04_1[] PROGMEM = "Galletitas 5 semillas 500gr";
+const char p04_2[] PROGMEM = "1200";
 
 // Producto 5
 const char p05_0[] PROGMEM = "006";
-const char p05_1[] PROGMEM = "Arroz 1kg";
-const char p05_2[] PROGMEM = "2200";
+const char p05_1[] PROGMEM = "Arroz Gallo Oro 1Kg";
+const char p05_2[] PROGMEM = "2300";
 
 // Producto 6
 const char p06_0[] PROGMEM = "007";
-const char p06_1[] PROGMEM = "Jugo Tang";
-const char p06_2[] PROGMEM = "600";
+const char p06_1[] PROGMEM = "Cafe Cabrales Molido 250gr";
+const char p06_2[] PROGMEM = "13300";
 
 // Producto 7
 const char p07_0[] PROGMEM = "008";
-const char p07_1[] PROGMEM = "Speed";
-const char p07_2[] PROGMEM = "1900";
+const char p07_1[] PROGMEM = "Speed 500ml";
+const char p07_2[] PROGMEM = "2500";
 
 // Producto 8
 const char p08_0[] PROGMEM = "009";
-const char p08_1[] PROGMEM = "Leche Serenisima";
-const char p08_2[] PROGMEM = "1800";
+const char p08_1[] PROGMEM = "Leche Serenisima 1L";
+const char p08_2[] PROGMEM = "2500";
+
+// Producto 9
+const char p09_0[] PROGMEM = "010";
+const char p09_1[] PROGMEM = "Yerba Mate Taragui 1Kg";
+const char p09_2[] PROGMEM = "4200";
+
+// Producto 10
+const char p10_0[] PROGMEM = "011";
+const char p10_1[] PROGMEM = "Fideos Don Vicente 500gr";
+const char p10_2[] PROGMEM = "2300";
+
+// Producto 11
+const char p11_0[] PROGMEM = "012";
+const char p11_1[] PROGMEM = "Pure de Tomate Arcor 530gr";
+const char p11_2[] PROGMEM = "1000";
+
+// Producto 12
+const char p12_0[] PROGMEM = "013";
+const char p12_1[] PROGMEM = "Queso Rallado La Paulina 40gr";
+const char p12_2[] PROGMEM = "1000";
+
+// Producto 13
+const char p13_0[] PROGMEM = "014";
+const char p13_1[] PROGMEM = "Pan Lactal Bimbo 600gr";
+const char p13_2[] PROGMEM = "5600";
+
+// Producto 14
+const char p14_0[] PROGMEM = "015";
+const char p14_1[] PROGMEM = "Harina Pureza 0000 1Kg";
+const char p14_2[] PROGMEM = "900";
+
+// Producto 15
+const char p15_0[] PROGMEM = "016";
+const char p15_1[] PROGMEM = "Sprite 2.25L";
+const char p15_2[] PROGMEM = "3800";
+
+// Producto 16
+const char p16_0[] PROGMEM = "017";
+const char p16_1[] PROGMEM = "Mermelada BC Frutilla 390gr";
+const char p16_2[] PROGMEM = "3000";
+
+// Producto 17
+const char p17_0[] PROGMEM = "018";
+const char p17_1[] PROGMEM = "Galletas Surtido Bagley 400gr";
+const char p17_2[] PROGMEM = "2300";
+
+// Producto 18
+const char p18_0[] PROGMEM = "019";
+const char p18_1[] PROGMEM = "Detergente Magistral 750ml";
+const char p18_2[] PROGMEM = "5200";
+
+// Producto 19
+const char p19_0[] PROGMEM = "020";
+const char p19_1[] PROGMEM = "Aceite de girasol Natura 1.5L";
+const char p19_2[] PROGMEM = "3600";
 
 // Matriz de punteros a los textos anteriores
 const char* const products[PRODUCTS][DATA] PROGMEM = {
@@ -73,6 +128,17 @@ const char* const products[PRODUCTS][DATA] PROGMEM = {
   { p06_0, p06_1, p06_2 },
   { p07_0, p07_1, p07_2 },
   { p08_0, p08_1, p08_2 },
+  { p09_0, p09_1, p09_2 },
+  { p10_0, p10_1, p10_2 },
+  { p11_0, p11_1, p11_2 },
+  { p12_0, p12_1, p12_2 },
+  { p13_0, p13_1, p13_2 },
+  { p14_0, p14_1, p14_2 },
+  { p15_0, p15_1, p15_2 },
+  { p16_0, p16_1, p16_2 },
+  { p17_0, p17_1, p17_2 },
+  { p18_0, p18_1, p18_2 },
+  { p19_0, p19_1, p19_2 },
 };
 
 
@@ -83,6 +149,7 @@ Keypad cust_keypad = Keypad(makeKeymap(keys), row_pins, col_pins, ROWS, COLS);
 
 enum Estado {
   ESPERANDO_CODIGO,
+  SELECCIONE_CANTIDAD,
   ESPERANDO_ACCION,
   AGREGAR_O_CANCELAR,
   FASE_PAGO
@@ -90,14 +157,20 @@ enum Estado {
 
 Estado estado_actual = ESPERANDO_CODIGO;
 
-byte total_code_products=10, code_digits=4;
+byte total_code_products=20, code_digits=4;
 
-char inserted_products[10][4];
+char inserted_products[20][4];
+byte amount_products[20];
 
 char char_code[4];
+
+bool esperandoCantidad = false;
+char amount[4] = {'\0'};
+byte cantidad_index = 0;
+
 byte i=0, inserted_products_lenght=0;
 
-int total_price=0;
+unsigned long total_price=0;
 
 void setup() {
   Serial.begin(9600);
@@ -113,33 +186,59 @@ void loop() {
       WriteCode(key);
       break;
     case AGREGAR_O_CANCELAR:
-      AddOrCancel(key, char_code);
+      AddOrCancel(key);
       break;
     case ESPERANDO_ACCION:
-      handleAction(key, char_code);
+      handleAction(key);
       break;
     case FASE_PAGO:
-      showTotalAndProcessThePayment(key, char_code);
+      showTotalAndProcessThePayment(key);
       break;
+  }
+}
+
+void showList() {
+  for (byte k = 0; k < inserted_products_lenght; k++) {
+    for (byte l = 0; l < PRODUCTS; l++) {
+      char code_buffer[4];
+      strcpy_P(code_buffer, (PGM_P)pgm_read_word(&products[l][0]));
+      if (strcmp(code_buffer, inserted_products[k]) == 0) {
+        char name_buffer[64];
+        char price_buffer[64];
+        strcpy_P(name_buffer, (PGM_P)pgm_read_word(&products[l][1]));
+        strcpy_P(price_buffer, (PGM_P)pgm_read_word(&products[l][2]));
+        unsigned int precio = atoi(price_buffer);
+        unsigned long total = (unsigned long)precio * amount_products[k];
+        Serial.println();
+        Serial.print(F("-- Codigo: "));
+        Serial.print(code_buffer);
+        Serial.print(F(" --- Nombre: "));
+        Serial.print(name_buffer);
+        Serial.print(F(" ---> x"));
+        Serial.print(amount_products[k]);
+        Serial.print(F(" ---> $"));
+        Serial.print(total);
+        Serial.println();
+      }
+    }
   }
 }
 
 
 void WriteCode(char key) {
-  if (isNumber(key)) {
-    char_code[i++] = key;
-    Serial.print(key);
+   if (esperandoCantidad) {
+    if (isNumber(key) && cantidad_index < 3) {
+      amount[cantidad_index++] = key;
+      Serial.print(key);
+    } else if (cantidad_index==3||key == 'B') {
+      amount[cantidad_index] = '\0';
+      esperandoCantidad = false;
+      Serial.println(F(""));
+      Serial.println(F(""));
 
-    if (i == 3) {
-      char_code[3] = '\0';  // Finaliza el string
-      Serial.println(F(""));
-      Serial.println(F(""));
-      Serial.println(F("Codigo ingresado."));
-      Serial.println(F(""));
-      Serial.println(F(""));
-      Serial.println(F("------------------------------------------------------------------------------"));
-      Serial.println(F(""));
-      Serial.println(F(""));
+      Serial.println(F("Cantidad ingresada."));
+
+      Serial.println(F("\n\n\n\n\n------------------------------------------------------------------------------\n"));
       Serial.println(F("Presione 'A' para agregar el producto."));
       Serial.println(F("Para cancelar la compra presione 'C'."));
       Serial.println(F("Para borrar el ultimo codigo ingresado y seguir agregando productos presione 'D'."));
@@ -147,12 +246,29 @@ void WriteCode(char key) {
 
       estado_actual = AGREGAR_O_CANCELAR;
     }
+    return;
+  }
+  if (isNumber(key)) {
+    char_code[i++] = key;
+    Serial.print(key);
+
+    if (i == 3) {
+      char_code[3] = '\0';
+      i = 0;
+      esperandoCantidad = true;
+      Serial.println(F(""));
+      Serial.println(F(""));
+
+      Serial.println(F("Ingrese cantidad (max 3 dígitos). Presione 'B' para confirmar:"));
+    }
   } else {
     switch (key) {
       case 'C':
         estado_actual = ESPERANDO_CODIGO;
         Serial.println(F(""));
+        Serial.println(F(""));
         Serial.println(F("Reiniciando compra..."));
+        Serial.println(F(""));
         Serial.println(F(""));
         cancelPurchase();
         break;
@@ -160,64 +276,62 @@ void WriteCode(char key) {
         estado_actual = ESPERANDO_CODIGO;
         Serial.println(F(""));
         Serial.println(F(""));
-        Serial.println(F("[  Codigo borrado.  ]"));
+        Serial.println(F("\n[  Codigo borrado.  ]\n"));
         deleteLastProduct();
         Serial.println(F(""));
         Serial.println(F(""));
         break;
       case 'E':
         estado_actual = ESPERANDO_ACCION;
+
         break;
     }
     resetCode();
   }
 }
-void AddOrCancel(char action, char code[4]) {
-  bool codeReady = strlen(code) == 3;
+void AddOrCancel(char action) {
+  byte cantidad = atoi(amount); 
 
   switch (action) {
     case 'A':
-      if (!codeReady) {
-        Serial.println(F(""));
-        Serial.println(F("[  Debe ingresar un codigo de producto primero.  ]"));
-        Serial.println(F(""));
-        estado_actual = ESPERANDO_CODIGO;
-        break;
-      }
-      addProduct(code);
+      if (cantidad == 0) cantidad = 1;
+      addProduct(char_code,cantidad);
       estado_actual = ESPERANDO_CODIGO;
       break;
 
     case 'C':
-      estado_actual = ESPERANDO_CODIGO;
       Serial.println(F(""));
       Serial.println(F("Reiniciando compra..."));
       Serial.println(F(""));
       cancelPurchase();
+      estado_actual = ESPERANDO_CODIGO;
       break;
 
     case 'D':
-      estado_actual = ESPERANDO_CODIGO;
       Serial.println(F(""));
       Serial.println(F(""));
       Serial.println(F("[  Codigo borrado.  ]"));
       deleteLastProduct();
       Serial.println(F(""));
       Serial.println(F(""));
+      estado_actual = ESPERANDO_CODIGO;
       break;
 
     case 'E':
+      Serial.println(F(""));
+      Serial.println(F(""));
+      Serial.println(F("[  Codigo borrado.  ]"));
+      Serial.println(F(""));
       estado_actual = ESPERANDO_ACCION;
       break;
+    default:
+      Serial.println(F("Tecla no reconocida."));
+      break;
   }
-
   resetCode();
 }
 
-void handleAction(char action, char code[4]) {
-  static unsigned long lastEPress = 0;
-  bool codeReady = strlen(code) == 3;
-
+void handleAction(char action) {
   switch (action) {
     case 'A':
       estado_actual = ESPERANDO_CODIGO;
@@ -282,7 +396,9 @@ void handleAction(char action, char code[4]) {
 void resetCode() {
   for (byte j = 0; j < 4; j++) char_code[j] = '\0';
   i = 0;
-
+  for (byte j = 0; j < 4; j++) amount[j] = '\0';
+  cantidad_index = 0;
+  esperandoCantidad = false;
   if (estado_actual == ESPERANDO_ACCION) {
     Serial.println(F(""));
     Serial.println(F(""));
@@ -321,7 +437,7 @@ bool isNumber(char key_pressed) {
   return notIsA && notIsB && notIsC && notIsD && notIsE && notIsEqual;
 }
 
-void addProduct(char new_code[4]) {
+void addProduct(char new_code[4], byte cantidad) {
   bool found = false;
   for (byte j = 0; j < PRODUCTS; j++) {
     char buffer[4];  // Solo para código de 3 chars + null
@@ -332,10 +448,12 @@ void addProduct(char new_code[4]) {
       // Copiamos solo 3 caracteres, luego agregamos terminador
       strncpy(inserted_products[inserted_products_lenght], new_code, 3);
       inserted_products[inserted_products_lenght][3] = '\0';
-
-      char price_buffer[8];
+      amount_products[inserted_products_lenght] = cantidad;
+      char price_buffer[64];
       strcpy_P(price_buffer, (PGM_P)pgm_read_word(&products[j][2]));
-      total_price += atoi(price_buffer);
+      unsigned int precio = atoi(price_buffer);
+      unsigned long total = (unsigned long)precio * cantidad;
+      total_price += total ;
 
       inserted_products_lenght++;
 
@@ -367,21 +485,30 @@ void cancelPurchase() {
       inserted_products[i][j] = '\0';
     }
   }
+  inserted_products_lenght = 0;
   return;
 }
 
 void deleteLastProduct() {
-  if (inserted_products_lenght == 0) return;
+  if (inserted_products_lenght <= 0) return;
 
   // Buscar producto para restar precio
-  char code_buffer[8];
-  char* last_code = inserted_products[inserted_products_lenght - 1];
+  char last_code[4];
+
+  byte index = inserted_products_lenght - 1;
+
+  int cantidad = amount_products[index]; 
+
+  strncpy(last_code, inserted_products[index], 4);
+
   for (int j = PRODUCTS - 1; j >= 0; j--) {
-    char price_buffer[16];
+    char code_buffer[8];
+    char price_buffer[64];
     strcpy_P(code_buffer, (PGM_P)pgm_read_word(&products[j][0]));
     if (strcmp(code_buffer, last_code) == 0) {
       strcpy_P(price_buffer, (PGM_P)pgm_read_word(&products[j][2]));
-      total_price -= atoi(price_buffer);
+      unsigned int precio = atoi(price_buffer);
+      total_price -= precio * cantidad;
       break;
     }
   }
@@ -389,6 +516,7 @@ void deleteLastProduct() {
   // Eliminar producto
   inserted_products_lenght--;
   inserted_products[inserted_products_lenght][0] = '\0';
+  amount_products[inserted_products_lenght] = 0;
 
   Serial.println();
   Serial.println(F("Ultimo producto eliminado"));
@@ -396,32 +524,10 @@ void deleteLastProduct() {
   delay(300);
 
   // Mostrar productos restantes
-  for (byte k = 0; k < inserted_products_lenght; k++) {
-    for (byte l = 0; l < PRODUCTS; l++) {
-      strcpy_P(code_buffer, (PGM_P)pgm_read_word(&products[l][0]));
-      if (strcmp(code_buffer, inserted_products[k]) == 0) {
-        char name_buffer[32];
-        char price_buffer[16];
-
-        strcpy_P(name_buffer, (PGM_P)pgm_read_word(&products[l][1]));
-        strcpy_P(price_buffer, (PGM_P)pgm_read_word(&products[l][2]));
-
-        Serial.println();
-        Serial.print(F("-- Codigo: "));
-        Serial.print(code_buffer);
-        Serial.print(F(" --- Nombre: "));
-        Serial.print(name_buffer);
-        Serial.print(F(" --->  $"));
-        Serial.print(price_buffer);
-        Serial.println();
-      }
-    }
-  }
+  showList();
 }
 
-void showTotalAndProcessThePayment(char action, char code[4]) {
-  static unsigned long lastEPress = 0;
-  bool codeReady = strlen(code) == 3;
+void showTotalAndProcessThePayment(char action) {
 
   switch (action) {
     case 'A':
@@ -448,53 +554,6 @@ void showTotalAndProcessThePayment(char action, char code[4]) {
       Serial.println(F("Tecla no reconocida."));
   }
 }
-
-void selectDiscount() {
-  bool added_discount = false;
-  while (!added_discount) {
-    char discount_key = cust_keypad.getKey();
-    if (discount_key == NO_KEY) continue;
-    switch (discount_key) {
-      case 'A':
-        Serial.println();
-        Serial.print(F("Descuento seleccionado 5%"));
-        Serial.println();
-        applyDiscount(5);
-        added_discount = true;
-        break;
-      case 'B':
-        Serial.println();
-        Serial.print(F("Descuento seleccionado 10%"));
-        Serial.println();
-        applyDiscount(10);
-        added_discount = true;
-        break;
-      case 'C':
-        Serial.println();
-        Serial.print(F("Descuento seleccionado 15%"));
-        Serial.println();
-        applyDiscount(15);
-        added_discount = true;
-        break;
-      case 'D':
-        Serial.println();
-        Serial.print(F("Descuento seleccionado 20%"));
-        Serial.println();
-        applyDiscount(20);
-        added_discount = true;
-        break;
-
-      default:
-        Serial.println(F("Descuento inexistente."));
-    }
-  }
-  paymentProcess();
-}
-
-void applyDiscount(byte discount){
-  total_price-=(total_price*discount)/100;
-}
-
 void paymentProcess() {
   Serial.println();
   Serial.print(F("El precio a pagar es de $"));
@@ -553,25 +612,52 @@ void paymentProcess() {
     }
   }
 }
-void showList() {
-  for (byte k = 0; k < inserted_products_lenght; k++) {
-    for (byte l = 0; l < PRODUCTS; l++) {
-      char code_buffer[4];
-      strcpy_P(code_buffer, (PGM_P)pgm_read_word(&products[l][0]));
-      if (strcmp(code_buffer, inserted_products[k]) == 0) {
-        char name_buffer[32];
-        char price_buffer[16];
-        strcpy_P(name_buffer, (PGM_P)pgm_read_word(&products[l][1]));
-        strcpy_P(price_buffer, (PGM_P)pgm_read_word(&products[l][2]));
+
+void selectDiscount() {
+  bool added_discount = false;
+  while (!added_discount) {
+    char discount_key = cust_keypad.getKey();
+    if (discount_key == NO_KEY) continue;
+    switch (discount_key) {
+      case 'A':
         Serial.println();
-        Serial.print(F("-- Codigo: "));
-        Serial.print(code_buffer);
-        Serial.print(F(" --- Nombre: "));
-        Serial.print(name_buffer);
-        Serial.print(F(" --->  $"));
-        Serial.print(price_buffer);
+        Serial.print(F("Descuento seleccionado 5%"));
         Serial.println();
-      }
+        applyDiscount(5);
+        added_discount = true;
+        break;
+      case 'B':
+        Serial.println();
+        Serial.print(F("Descuento seleccionado 10%"));
+        Serial.println();
+        applyDiscount(10);
+        added_discount = true;
+        break;
+      case 'C':
+        Serial.println();
+        Serial.print(F("Descuento seleccionado 15%"));
+        Serial.println();
+        applyDiscount(15);
+        added_discount = true;
+        break;
+      case 'D':
+        Serial.println();
+        Serial.print(F("Descuento seleccionado 20%"));
+        Serial.println();
+        applyDiscount(20);
+        added_discount = true;
+        break;
+
+      default:
+        Serial.println(F("Descuento inexistente."));
     }
   }
-}  
+  paymentProcess();
+}
+
+void applyDiscount(byte discount){
+  unsigned long descuento = total_price * discount / 100.0;
+  total_price -= descuento;  // Convertimos de nuevo a int si total_price es int
+}
+
+
