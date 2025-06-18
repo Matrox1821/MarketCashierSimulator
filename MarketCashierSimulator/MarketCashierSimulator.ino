@@ -338,7 +338,7 @@ void WriteCode(char key) {
       esperandoCantidad = true;
       Serial.println(F(""));
       Serial.println(F(""));
-      Serial.println(F("Ingrese cantidad (max 3 dígitos). Presione 'B' para confirmar:"));
+      Serial.println(F("Ingrese cantidad (max 3 digitos). Presione 'B' para confirmar:"));
     }
   } else {
     switch (key) {
