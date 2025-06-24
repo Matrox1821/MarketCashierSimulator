@@ -149,7 +149,6 @@ Keypad cust_keypad = Keypad(makeKeymap(keys), row_pins, col_pins, ROWS, COLS);
 
 enum Estado {
   ESPERANDO_CODIGO,
-  SELECCIONE_CANTIDAD,
   ESPERANDO_ACCION,
   AGREGAR_O_CANCELAR,
   FASE_PAGO
@@ -183,13 +182,11 @@ void loop() {
   if (!key) return;
   switch (estado_actual) {
     case ESPERANDO_CODIGO:
-      WriteCode(key);
+      writeCode(key);
       break;
     case AGREGAR_O_CANCELAR:
-      AddOrCancel(key);
-      break;
     case ESPERANDO_ACCION:
-      handleAction(key);
+      handleActions(key);
       break;
     case FASE_PAGO:
       showTotalAndProcessThePayment(key);
@@ -312,7 +309,7 @@ void showList() {
 }
 
 
-void WriteCode(char key) {
+void writeCode(char key) {
    if (esperandoCantidad) {
     if (isNumber(key) && cantidad_index < 3) {
       amount[cantidad_index++] = key;
@@ -321,7 +318,6 @@ void WriteCode(char key) {
       amount[cantidad_index] = '\0';
       esperandoCantidad = false;
       
-
       MessageToWriteCode();
 
       estado_actual = AGREGAR_O_CANCELAR;
@@ -341,61 +337,26 @@ void WriteCode(char key) {
       Serial.println(F("Ingrese cantidad (max 3 digitos). Presione 'B' para confirmar:"));
     }
   } else {
-    switch (key) {
-      case 'C':
-        estado_actual = ESPERANDO_CODIGO;
-        MessageToReloadPurchase();
-        cancelPurchase();
-        break;
-      case 'D':
-        estado_actual = ESPERANDO_CODIGO;
-        MessageToDeleteCode();
-        deleteLastProduct();
-        break;
-      case 'E':
-        estado_actual = ESPERANDO_ACCION;
+    handleActions(key);
+  }
+}
 
-        break;
+void handleActions(char key) {
+  switch (key) {
+    case 'A': {
+      if (estado_actual == AGREGAR_O_CANCELAR) {
+        byte cantidad = atoi(amount);
+        if (cantidad == 0) cantidad = 1;
+        addProduct(char_code, cantidad);
+      }
+      estado_actual = ESPERANDO_CODIGO;
+      break;
     }
-    resetCode();
-  }
-}
-void AddOrCancel(char action) {
-  byte cantidad = atoi(amount); 
-  switch (action) {
-    case 'A':
-      if (cantidad == 0) cantidad = 1;
-      addProduct(char_code,cantidad);
-      estado_actual = ESPERANDO_CODIGO;
-      break;
-    case 'C':
-      MessageToReloadPurchase();
-      cancelPurchase();
-      estado_actual = ESPERANDO_CODIGO;
-      break;
-    case 'D':
-      MessageToDeleteCode();
-      deleteLastProduct();
-      estado_actual = ESPERANDO_CODIGO;
-      break;
-    case 'E':
-      estado_actual = ESPERANDO_ACCION;
-      break;
-  }
-  resetCode();
-}
 
-void handleAction(char action) {
-  switch (action) {
-    case 'A':
-      estado_actual = ESPERANDO_CODIGO;
-      resetCode();
-      break;
     case 'C':
       MessageToReloadPurchase();
       cancelPurchase();
       estado_actual = ESPERANDO_CODIGO;
-      resetCode();
       break;
 
     case 'D':
@@ -404,36 +365,46 @@ void handleAction(char action) {
         deleteLastProduct();
       } else {
         MessageToDeleteCodeNonExistent();
-        resetCode();
       }
+      estado_actual = ESPERANDO_CODIGO;
       break;
 
     case 'E':
-      Serial.println(F("Finalizando turno..."));
-      cancelPurchase();
-      Serial.end();
+      if (estado_actual != ESPERANDO_ACCION) {
+        estado_actual = ESPERANDO_ACCION;
+      } else {
+        Serial.println(F("Finalizando turno..."));
+        cancelPurchase();
+        Serial.end();
+      }
       break;
 
     case '=':
+      if(estado_actual == ESPERANDO_CODIGO) break;
+
       if (inserted_products_lenght > 0) {
         MessagePayment();
         estado_actual = FASE_PAGO;
       } else {
-        Serial.println(F(""));
+        Serial.println();
         Serial.println(F("No hay productos agregados."));
-        resetCode();
       }
       break;
 
     default:
       Serial.println(F("Tecla no reconocida."));
+      break;
   }
+
+  resetCode();
 }
 
 void resetCode() {
-  for (byte j = 0; j < 4; j++) char_code[j] = '\0';
+  for (byte j = 0; j < 4; j++) {
+    char_code[j] = '\0';
+    amount[j] = '\0';
+  }
   i = 0;
-  for (byte j = 0; j < 4; j++) amount[j] = '\0';
   cantidad_index = 0;
   esperandoCantidad = false;
   if (estado_actual == ESPERANDO_ACCION) {
@@ -463,15 +434,9 @@ void resetCode() {
     Serial.println(F(""));
   }
 }
-bool isNumber(char key_pressed) {
-  bool notIsA = key_pressed!='A',
-       notIsB = key_pressed!='B',
-       notIsC = key_pressed!='C',
-       notIsD = key_pressed!='D',
-       notIsE = key_pressed!='E',
-       notIsEqual = key_pressed!='=';
 
-  return notIsA && notIsB && notIsC && notIsD && notIsE && notIsEqual;
+bool isNumber(char key_pressed) {
+  return key_pressed >= '0' && key_pressed <= '9';
 }
 
 void addProduct(char new_code[4], byte cantidad) {
@@ -510,9 +475,9 @@ void addProduct(char new_code[4], byte cantidad) {
 void cancelPurchase() {
   estado_actual = ESPERANDO_CODIGO;
   for (byte j = 0; j < 4; j++) char_code[j] = '\0';
-  for (byte i = 0; i < total_code_products; i++) {
-    for (byte j = 0; j < code_digits; j++) {
-      inserted_products[i][j] = '\0';
+  for (byte j = 0; j < total_code_products; j++) {
+    for (byte k = 0; k < code_digits; k++) {
+      inserted_products[j][k] = '\0';
     }
   }
   inserted_products_lenght = 0;
