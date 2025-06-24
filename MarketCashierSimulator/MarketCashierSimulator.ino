@@ -524,7 +524,6 @@ void showTotalAndProcessThePayment(char action) {
   switch (action) {
     case 'A':
       paymentProcess();
-      resetCode();
       break;
 
     case 'B':
@@ -599,6 +598,7 @@ void paymentProcess() {
         Serial.println(F("-----------------------[ Nueva compra ]---------------------------"));
         Serial.println();
         resetCode();
+        cancelPurchase();
         payCompleted = true;
       }
     }
